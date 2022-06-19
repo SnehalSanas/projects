@@ -16,7 +16,9 @@ class Villa < ApplicationRecord
                 name: villa[0],
                 availability: villa[1],
                 average_price: villa[2],
-                average_price_gst: get_gst_price(villa[2])
+                average_price_gst: get_gst_price(villa[2]),
+                rate_price: villa[3],
+                rate_price_gst: get_gst_price(villa[3])
             }
         end
         result

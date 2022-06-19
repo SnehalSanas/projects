@@ -19,16 +19,20 @@ ActiveRecord::Schema.define(version: 2022_06_17_200911) do
     t.date "booking_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["availability"], name: "index_villa_schedules_on_availability"
-    t.index ["villa_id", "booking_date"], name: "index_villa_schedules_on_villa_id_and_booking_date", unique: true
+    t.index ["booking_date", "villa_id"], name: "index_villa_schedules_on_booking_date_and_villa_id", unique: true
   end
 
   create_table "villas", id: :bigint, unsigned: true, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.integer "status", default: 0, unsigned: true
+    t.text "address"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "pincode", limit: 15
+    t.string "mobile", limit: 15
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_villas_on_name", unique: true
     t.index ["status"], name: "index_villas_on_status"
   end
 

@@ -1,0 +1,27 @@
+version: "3.7"
+services: 
+  app: 
+    build: "."
+    restart: on-failure:10
+    depends_on: 
+      - db
+    environment: 
+      DB_NAME: app
+      DB_HOST: db
+      DB_PASSWORD: password
+      DB_USER: root
+      DB_PORT: 3306
+    links: 
+      - db
+    ports: 
+      - "3000:3000"
+  db: 
+    environment: 
+      MYSQL_DATABASE: app
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: user
+    image: "mysql:5.7"
+    ports: 
+      - "3306:3306"
+
