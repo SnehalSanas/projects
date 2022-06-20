@@ -12,14 +12,16 @@ class Villa < ApplicationRecord
     def self.format_villa_array(villas)  
         result = []
         if villas.present?
-            [*villas].each do |villa|
-                result << {
-                    name: villa[0],
-                    availability: villa[1],
-                    price: villa[2],
-                    gst_price: get_gst_price(villa[2]),
-                    villa_address: villa[3]
-                }
+            villas.each do |villa|
+            unless villa.reject { |c| c.blank? }
+                    result << {
+                        name: villa[0],
+                        availability: villa[1],
+                        price: villa[2],
+                        gst_price: get_gst_price(villa[2]),
+                        villa_address: villa[3]
+                    }
+            end
             end
         end    
         result
