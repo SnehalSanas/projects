@@ -8,16 +8,9 @@ default: &default
   reconnect: true
   port: <%= ENV['DB_PORT'] %>
 
-# development:
-#   <<: *default
-#   database: <%= ENV['DB_NAME'] %>
-#   host: <%= ENV['DB_HOST'] %>
-#   username: <%= ENV['DB_USERNAME'] %>
-#   password: <%= ENV['DB_PASSWORD'] %>
-
 development:
   <<: *default
-  username: techteamdbad
-  password: TcHemo0nCtI
-  host: 172.104.180.89
-  database: sn_test
+  database: <%= ENV['DB_NAME'] %>
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
