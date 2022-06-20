@@ -9,7 +9,7 @@ module ManageVilla
         pluck_statement = "villas.name, SUM(Case 
         When villa_schedules.availability = true Then 0 
         Else 1 End) AS villa_availability, AVG(villa_schedules.price) as average_price,
-        CONCAT(`address`, ' ', `city`, ' ', pincode, ' ', state, ' ', country, ' ', mobile) as address"
+        CONCAT(`address`, ' ', `city`, ' ', pincode, ' ', state, ' ', country, ' ', mobile) as address, villas.id as villa_id"
 
         villas = Villa.joins(:villa_schedules)
         .where("(villa_schedules.booking_date >= '#{Date.parse(params['from'])}' and  villa_schedules.booking_date < '#{Date.parse(params['to'])}') ")
@@ -27,7 +27,7 @@ module ManageVilla
         pluck_statement = "villas.name, SUM(Case 
         When villa_schedules.availability = true Then 0 
         Else 1 End) AS villa_availability, sum(villa_schedules.price) as sum_price,  
-        CONCAT(`address`, ' ', `city`, ' ', pincode, ' ', state, ' ', country, ' ', mobile) as address"
+        CONCAT(`address`, ' ', `city`, ' ', pincode, ' ', state, ' ', country, ' ', mobile) as address "
 
         villa = Villa.joins(:villa_schedules)
         .where(id: params[:id], status: Villa.statuses[:active])

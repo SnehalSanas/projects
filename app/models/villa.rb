@@ -20,7 +20,8 @@ class Villa < ApplicationRecord
                             availability: final_villa[1],
                             price: final_villa[2],
                             gst_price: get_gst_price(final_villa[2]),
-                            villa_address: final_villa[3]
+                            villa_address: final_villa[3],
+                            villa_id: final_villa[4]
                         }
                 end
             end
@@ -29,7 +30,7 @@ class Villa < ApplicationRecord
     end
 
     def self.get_gst_price(price)
-        price + ( price * 18/100)
+       ( price + ( price * 18/100)).round(2)
     end
     
   
