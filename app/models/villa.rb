@@ -13,15 +13,16 @@ class Villa < ApplicationRecord
         result = []
         if villas.present?
             villas.each do |villa|
-            unless villa.reject { |c| c.blank? }
-                    result << {
-                        name: villa[0],
-                        availability: villa[1],
-                        price: villa[2],
-                        gst_price: get_gst_price(villa[2]),
-                        villa_address: villa[3]
-                    }
-            end
+                final_villa = villa.reject { |c| c.blank? }
+                if final_villa.present?
+                        result << {
+                            name: final_villa[0],
+                            availability: final_villa[1],
+                            price: final_villa[2],
+                            gst_price: get_gst_price(final_villa[2]),
+                            villa_address: final_villa[3]
+                        }
+                end
             end
         end    
         result
