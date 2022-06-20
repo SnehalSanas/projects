@@ -11,22 +11,23 @@ class Villa < ApplicationRecord
 
     def self.format_villa_array(villas)  
         result = []
-        villas.each do |villa|
-            result << {
-                name: villa[0],
-                availability: villa[1],
-                average_price: villa[2],
-                average_price_gst: get_gst_price(villa[2]),
-                rate_price: villa[3],
-                rate_price_gst: get_gst_price(villa[3])
-            }
-        end
+        if villas.present?
+            [*villas].each do |villa|
+                result << {
+                    name: villa[0],
+                    availability: villa[1],
+                    price: villa[2],
+                    gst_price: get_gst_price(villa[2]),
+                    villa_address: villa[3]
+                }
+            end
+        end    
         result
     end
 
     def self.get_gst_price(price)
         price + ( price * 18/100)
-     end
+    end
     
   
 end
