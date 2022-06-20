@@ -8,11 +8,11 @@ module ManageVilla
 
         pluck_statement = "villas.name, SUM(Case 
         When villa_schedules.availability = true Then 0 
-        Else 1 End) AS villa_availability, AVG(villa_schedules.price) as average_price
+        Else 1 End) AS villa_availability, AVG(villa_schedules.price) as average_price,
         CONCAT(`address`, ' ', `city`, ' ', pincode, ' ', state, ' ', country, ' ', mobile) as address"
 
         villas = Villa.joins(:villa_schedules)
-        .where("(villa_schedules.booking_date between '#{params['from']}' and '#{params['to']}') ")
+        .where("(villa_schedules.booking_date >= '#{Date.parse(params['from'])}' and  villa_schedules.booking_date < '#{Date.parse(params['to'])}') ")
         .where(status: Villa.statuses[:active])
         .group("villas.id")
         .order(order_by)
@@ -31,7 +31,7 @@ module ManageVilla
 
         villa = Villa.joins(:villa_schedules)
         .where(id: params[:id], status: Villa.statuses[:active])
-        .where("(villa_schedules.booking_date between '#{params['from']}' and '#{params['to']}') ")
+        .where("(villa_schedules.booking_date >= '#{Date.parse(params['from'])}' and  villa_schedules.booking_date < '#{Date.parse(params['to'])}') ")
         .pluck(Arel.sql(pluck_statement))
         
         villa
