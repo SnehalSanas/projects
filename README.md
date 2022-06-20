@@ -22,7 +22,7 @@
     ```
     API to calculate the total rate along with availability of a given villa for entered dates. Please get villa id from above api.
     ```
-    curl --location --request GET 'http://localhost:3000/v1/villas/<villaid>/get_rates?from=2021-01-01&to=2021-01-02&offset=0&limit=100' \ --header 'Content-Type: application/json'
+    curl --location --request GET 'http://localhost:3000/v1/villas/<villaid>/get_rates?from=2021-01-01&to=2021-01-02&offset=0&limit=100' \--header 'Content-Type: application/json'
     ```
 4. if you want to login on mysql docker
     ```
